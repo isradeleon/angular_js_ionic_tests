@@ -1,0 +1,23 @@
+<ion-content [fullscreen]="true">
+  <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
+
+  <div id="container">
+
+    <div>
+      <img style="max-width: 150px; width: 100%;" src="assets/fakelogo.png" alt="fakelogo">
+    </div>
+
+    <ion-input [attr.disabled]="loading ? '' : null" [(ngModel)]="email" type="email" placeholder="correo@ejemplo.com">
+    </ion-input>
+    <ion-input [attr.disabled]="loading ? '' : null" [(ngModel)]="password" type="password" placeholder="Contraseña">
+    </ion-input>
+
+    <div>
+      <ion-text color="danger" style="font-size: 0.9rem;">{{error}}</ion-text>
+    </div>
+
+    <ion-button [attr.disabled]="loading ? '' : null" (click)="sendLogin()" color="dark">Iniciar sesión</ion-button>
+
+  </div>
+
+</ion-content>

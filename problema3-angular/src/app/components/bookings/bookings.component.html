@@ -1,0 +1,41 @@
+<div class="site-section" style="background: rgb(101, 19, 214);">
+    <div style="margin: auto; background: white; padding: 20px; width: 100%; max-width: 1000px;">
+        
+        <div *ngIf="!loading" style="width: 100%; overflow-x: auto;">
+            <div class="flex items-center">
+                <i style="font-size: 1.5rem; color: rgb(101, 19, 214);" class="typcn typcn-zoom-outline"></i>
+                <input (input)="onSearchChange($event.target.value)" style="margin: 10px 5px;" type="text" placeholder="Búsqueda">
+            </div>
+        
+            <table>
+                <thead>
+                    <tr>
+                        <th>BookingId</th>
+                        <th>Cliente</th>
+                        <th>Fecha de Creación</th>
+                        <th>Dirección</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of data;">
+                        <td>{{item.bookingId}}</td>
+                        <td>{{item.tutenUserClient.firstName+" "+item.tutenUserClient.lastName}}</td>
+                        <td>{{item.bookingTime | date}}</td>
+                        <td>{{item.locationId.streetAddress}}</td>
+                        <td>{{ '$'+item.bookingPrice}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div *ngIf="loading">
+            <app-loader></app-loader>
+        </div>
+
+        <br>
+        <div class="text-right">
+            <button (click)="logout()" class="btn inverted">Cerrar sesión</button>
+        </div>
+    </div>
+</div>

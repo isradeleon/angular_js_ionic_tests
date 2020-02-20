@@ -1,0 +1,27 @@
+<div class="site-section" style="background: rgb(101, 19, 214);">
+    <div style="max-width: 300px; width: 100%; margin: auto; background: white; padding: 20px;">
+        <div class="text-center">
+            <img src="assets/fakelogo.png" alt="fakelogo" style="max-width: 150px;">
+        </div>
+        
+        <div *ngIf="!loading">
+            <br>
+            <div class="text-center">
+                <small class="text-danger">{{error}}</small>
+            </div>
+            <input style="width: 100%; margin: 10px 0px" type="email" [(ngModel)]="email" placeholder="Correo electrónico">
+            <input style="width: 100%; margin: 10px 0px" type="password" [(ngModel)]="password" placeholder="Contraseña">
+            
+            
+            <button (click)="sendLogin()" class="btn inverted" style="width: 100%;">
+                Iniciar sesión
+            </button>
+
+        </div>
+        
+        <div *ngIf="loading">
+            <app-loader></app-loader>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/coraline.min.css">
+    <link rel="stylesheet" href="css/jquery-timepicker.min.css">
+    <style>
+        select{
+            border: 1px solid
+            #eaeaea;
+            padding: .7rem .8rem;
+            box-shadow: inset 0 0 6px
+            rgba(35,35,35,.02);
+            margin: .3rem;
+            font-family: Helvetica,sans-serif;
+        }select,input,button{
+            width: 100%;
+            max-width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="site-section">
+        <h5>Timezone calculator</h5>
+        <input type="text" class="timepicker">
+        <select name="" id="tz">
+        </select>
+        
+        <button onclick="sendTime()" class="btn rounded info">Calcular</button>
+
+        <pre></pre>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-timepicker.min.js"></script>
+    <script>
+        $(function () {
+            for (let index = 14; index >= -11; index--) {
+                if(index != 0){
+                    $('#tz').append($('<option>', {
+                        value: index,
+                        text: (index > 0 ? '+' : '')+index
+                    }));
+                }
+            }
+
+            $('.timepicker').timepicker({
+                timeFormat: 'HH:mm:ss',
+                interval: 30,
+                minTime: '12:00am',
+                maxTime: '11:00pm',
+                defaultTime: '11',
+                startTime: '12:00am',
+                dynamic: false,
+                dropdown: true,
+                scrollbar: true
+            });
+        })
+
+        function sendTime(){
+            $.get(
+            "date?time="+$('.timepicker').val()+"&tz="+$('#tz').val(), 
+            function( result ) {
+                console.log(result)
+                $('pre').text(JSON.stringify(result))
+            });
+        }
+    </script>
+</body>
+
+</html>
